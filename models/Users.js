@@ -18,8 +18,9 @@ const Users = module.exports = mongoose.model('Users', userSchema, 'Users');
 
 module.exports.login = async (params) => {
     try {
-        return Users.find({ })
+        return Users.find({})
             .then((user) => {
+                console.log(user);
                 return { user };
             })
             .catch((error) => {
@@ -30,4 +31,3 @@ module.exports.login = async (params) => {
     }
 }
 
- 

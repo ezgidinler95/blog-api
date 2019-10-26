@@ -2,11 +2,11 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const bodyParsel = require('body-parser');
 var logger = require('morgan');
+const cors = require('cors');
 const db = require("./helper/db")();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 
 var app = express();
@@ -15,19 +15,31 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+const corsOptions = {
+  exposedHeaders: ['Content-Length', 'Developer-By', 'X-Powered-By', "File-Name"],
+};
+
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParsel.json());
+app.use(bodyParsel.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// const userController = require('./routes/user');
-// app.use('/login', userController);
+// user login
+const userController = require("./controllers/usercontroller.js");
+app.use('/login', userController.login);
 
+// user
+const userRouter = require('./routes/user');
+app.use('/user', userRouter);
 
- //app.use('/', indexRouter);
-
+// // generalInformation
+//  const generalInformationRouter = require('./routes/generalInformation');
+//  app.use('/general-information', generalInformationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
