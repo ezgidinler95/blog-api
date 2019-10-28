@@ -45,6 +45,10 @@ app.use('/general-information', generalInformationRouter);
 const hobbyRouter = require('./routes/hobby');
 app.use('/hobby', hobbyRouter);
 
+// School
+const schoolRouter = require('./routes/school');
+app.use('/school', schoolRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
