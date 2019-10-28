@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    passwors: {
+    password: {
         type: String,
         required: true
     },
@@ -18,7 +18,7 @@ const Users = module.exports = mongoose.model('Users', userSchema, 'Users');
 
 module.exports.login = async (params) => {
     try {
-        return Users.find({})
+        return Users.find({ email: params.email })
             .then((user) => {
                 console.log(user);
                 return { user };
@@ -30,4 +30,3 @@ module.exports.login = async (params) => {
         return { error };
     }
 }
-

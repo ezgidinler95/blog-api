@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const generalInformationSchema = new Schema({
-    general: {
+    genelBilgi: {
         type: String,
         required: true
     },
@@ -11,7 +11,6 @@ const generalInformationSchema = new Schema({
 const GeneralInformations = module.exports = mongoose.model('GeneralInformations', generalInformationSchema, 'GeneralInformations');
 
 module.exports.addGeneralInformation = (params) => {
-
     try {
         const generalInformation = new GeneralInformations(params);
         return generalInformation.save()
@@ -25,3 +24,18 @@ module.exports.addGeneralInformation = (params) => {
         return { error };
     }
 }
+
+module.exports.all = () => {
+    try {
+        return GeneralInformations.find({})
+            .then((generalInformations) => {
+                return { generalInformations };
+            })
+            .catch((error) => {
+                return { error };
+            });
+    } catch (error) {
+        return { error };
+    }
+}
+

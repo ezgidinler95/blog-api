@@ -2,11 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const bodyParsel = require('body-parser');
+const bodyParser = require('body-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const db = require("./helper/db")();
-
 var mongoose = require('mongoose');
 
 var app = express();
@@ -23,8 +22,9 @@ app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParsel.json());
-app.use(bodyParsel.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -37,9 +37,13 @@ app.use('/login', userController.login);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 
-// // generalInformation
-//  const generalInformationRouter = require('./routes/generalInformation');
-//  app.use('/general-information', generalInformationRouter);
+// generalInformation
+const generalInformationRouter = require('./routes/generalInformation');
+app.use('/general-information', generalInformationRouter);
+
+// Hobby
+const hobbyRouter = require('./routes/hobby');
+app.use('/hobby', hobbyRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
