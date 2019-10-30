@@ -45,6 +45,10 @@ app.use('/general-information', generalInformationRouter);
 const hobbyRouter = require('./routes/hobby');
 app.use('/hobby', hobbyRouter);
 
+// Opinion
+const opinionRouter = require('./routes/opinion');
+app.use('/opinion', opinionRouter);
+
 // School
 const schoolRouter = require('./routes/school');
 app.use('/school', schoolRouter);
