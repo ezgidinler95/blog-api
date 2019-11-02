@@ -1,12 +1,12 @@
-const GeneralInformations = require('../models/GeneralInformations');
+const Recommends = require('../models/Recommends');
 
-exports.addGeneralInformation = async (req, res) => {
-    const { generalInformation, error } = await GeneralInformations.addGeneralInformation(req.body);
+exports.addRecommend = async (req, res) => {
+    const { recommend, error } = await Recommends.addRecommend(req.body);
     if (!error) {
         res.json({
             code: 200,
             data: {
-                generalInformation
+                recommend
             }
         });
     } else {
@@ -17,13 +17,13 @@ exports.addGeneralInformation = async (req, res) => {
     }
 }
 
-exports.allGeneralInformation = async (req, res) => {
-    const { generalInformations, error } = await GeneralInformations.all();
+exports.allRecommends = async (req, res) => {
+    const { recommends, error } = await Recommends.all();
     if (!error) {
         res.json({
             code: 200,
             data: {
-                generalInformations
+                recommends
             }
         });
     } else {
@@ -34,13 +34,13 @@ exports.allGeneralInformation = async (req, res) => {
     }
 }
 
-exports.updateGeneralInformation = async (req, res) => {
-    const { generalInformation, error } = await GeneralInformations.updateGeneralInformation(req.body);
+exports.updateRecommend = async (req, res) => {
+    const { recommend, error } = await Recommends.updateRecommend(req.body);
     if (!error) {
         res.json({
             code: 200,
             data: {
-                generalInformation
+                recommend
             }
         });
     } else {
@@ -49,5 +49,4 @@ exports.updateGeneralInformation = async (req, res) => {
             message: error.message
         });
     }
-
 }

@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const generalInformationSchema = new Schema({
     genelBilgi: {
         type: String,
-        required: true
+    },
+    baslik: {
+        type: String,
     },
 });
 
@@ -39,3 +41,16 @@ module.exports.all = () => {
     }
 }
 
+module.exports.updateGeneralInformation = (params) => {
+    try {
+        return GeneralInformations.findByIdAndUpdate(mongoose.Types.ObjectId(params._id), { ...params }, { new: true })
+            .then((updatedGeneralInformation) => {
+                return { generalInformation: updatedGeneralInformation };
+            })
+            .catch((error) => {
+                return { error };
+            });
+    } catch (error) {
+        return { error };
+    }
+}

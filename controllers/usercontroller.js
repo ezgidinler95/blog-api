@@ -1,7 +1,6 @@
 const Users = require('../models/Users');
 
 exports.login = async (req, res, next) => {
-    console.log("burya geliyor mu");
     const { user, error } = await Users.login(req.body);
     console.log(req.body.email, "veriler dogru geliyor mu");
     if (!req.body.email || !req.body.password) {

@@ -33,3 +33,21 @@ exports.allHobbies = async (req, res) => {
         });
     }
 }
+
+exports.updateHobby = async (req, res) => {
+    const { hobby, error } = await Hobbies.updateHobby(req.body);
+    if (!error) {
+        res.json({
+            code: 200,
+            data: {
+                hobby
+            }
+        });
+    } else {
+        res.json({
+            code: 422,
+            message: error.message
+        });
+    }
+
+}

@@ -2,20 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const hobbiesSchema = new Schema({
+    baslik: {
+        type: String,
+        required: true
+    },
     spor: {
         type: String,
     },
     dans: {
         type: String,
-
     },
     müzik: {
         type: String,
-
     },
     kitap: {
         type: String,
-
     },
 });
 
@@ -41,6 +42,20 @@ module.exports.all = () => {
         return Hobbies.find({})
             .then((hobbies) => {
                 return { hobbies };
+            })
+            .catch((error) => {
+                return { error };
+            });
+    } catch (error) {
+        return { error };
+    }
+}
+
+module.exports.updateHobby = (params) => {
+    try {
+        return Hobbies.findByIdAndUpdate(mongoose.Types.ObjectId(params._id), { ...params }, { new: true })
+            .then((updatedHobby) => {
+                return { hobby: updatedHobby };
             })
             .catch((error) => {
                 return { error };

@@ -20,7 +20,6 @@ module.exports.login = async (params) => {
     try {
         return Users.find({ email: params.email })
             .then((user) => {
-                console.log(user);
                 return { user };
             })
             .catch((error) => {
