@@ -53,6 +53,10 @@ app.use('/opinion', opinionRouter);
 const recommendRouter = require('./routes/recommend');
 app.use('/recommend', recommendRouter);
 
+// agenda
+const agendaouter = require('./routes/agenda');
+app.use('/agenda', agendaouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

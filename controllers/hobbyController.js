@@ -1,6 +1,9 @@
 const Hobbies = require('../models/Hobbies');
 
 exports.addHobby = async (req, res) => {
+    if (req.files[0]) {
+        req.body.image = req.files[0].path.replace("public/hobbyImages/", "");
+    }
     const { hobby, error } = await Hobbies.addHobby(req.body);
     if (!error) {
         res.json({

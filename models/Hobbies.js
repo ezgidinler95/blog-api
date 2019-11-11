@@ -18,6 +18,9 @@ const hobbiesSchema = new Schema({
     kitap: {
         type: String,
     },
+    image: {
+        type: String,
+    },
 });
 
 const Hobbies = module.exports = mongoose.model('Hobbies', hobbiesSchema, 'Hobbies');
