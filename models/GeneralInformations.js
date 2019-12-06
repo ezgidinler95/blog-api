@@ -8,6 +8,10 @@ const generalInformationSchema = new Schema({
     baslik: {
         type: String,
     },
+    tarih: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 const GeneralInformations = module.exports = mongoose.model('GeneralInformations', generalInformationSchema, 'GeneralInformations');
