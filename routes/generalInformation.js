@@ -5,5 +5,6 @@ const generalInformationController = require('../controllers/generalInformationC
 router.post('/', generalInformationController.addGeneralInformation);
 router.get('/all', generalInformationController.allGeneralInformation);
 router.put('/', generalInformationController.updateGeneralInformation);
+router.get('/:_id', generalInformationController.getGeneralInformation);
 
 module.exports = router;

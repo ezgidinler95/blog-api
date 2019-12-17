@@ -8,10 +8,11 @@ const generalInformationSchema = new Schema({
     baslik: {
         type: String,
     },
-    tarih: {
+    tarih:
+    {
         type: Date,
         default: Date.now
-    },
+    }
 });
 
 const GeneralInformations = module.exports = mongoose.model('GeneralInformations', generalInformationSchema, 'GeneralInformations');
@@ -50,6 +51,20 @@ module.exports.updateGeneralInformation = (params) => {
         return GeneralInformations.findByIdAndUpdate(mongoose.Types.ObjectId(params._id), { ...params }, { new: true })
             .then((updatedGeneralInformation) => {
                 return { generalInformation: updatedGeneralInformation };
+            })
+            .catch((error) => {
+                return { error };
+            });
+    } catch (error) {
+        return { error };
+    }
+}
+
+module.exports.getGeneralInformation = (params) => {
+    try {
+        return GeneralInformations.findById(mongoose.Types.ObjectId(params._id))
+            .then((generalInformation) => {
+                return { generalInformation };
             })
             .catch((error) => {
                 return { error };
